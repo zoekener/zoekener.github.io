@@ -6,22 +6,41 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5dc;
-      color: #333;
+      background-color: #e0f7fa; /* soft blue */
+      color: #006064;
       text-align: center;
-      margin: 20px;
+      padding: 40px;
+    }
+    h1 {
+      color: #00796b;
     }
     input[type="number"] {
-      padding: 5px;
-      width: 60px;
+      padding: 8px;
+      width: 80px;
+      font-size: 1em;
     }
     button {
-      padding: 5px 10px;
+      padding: 8px 15px;
       margin-left: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      background-color: #00796b;
+      color: white;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #004d40;
     }
     #message {
       margin-top: 20px;
       font-size: 1.2em;
+      min-height: 40px;
+    }
+    #attempts {
+      margin-top: 10px;
+      font-size: 1em;
+      color: #004d40;
     }
   </style>
 </head>
@@ -32,30 +51,46 @@
 
 <input type="number" id="guess" min="1" max="100">
 <button onclick="checkGuess()">Guess</button>
+<button onclick="restartGame()">Restart Game</button>
 
 <div id="message"></div>
+<div id="attempts"></div>
 
 <script>
-  const secretNumber = Math.floor(Math.random() * 100) + 1;
+  let secretNumber = Math.floor(Math.random() * 100) + 1;
   let attempts = 0;
 
   function checkGuess() {
     const guess = Number(document.getElementById('guess').value);
     const message = document.getElementById('message');
+    const attemptDiv = document.getElementById('attempts');
     attempts++;
 
     if (!guess || guess < 1 || guess > 100) {
-      message.textContent = "Please enter a number between 1 and 100.";
+      message.textContent = "⚠️ Please enter a number between 1 and 100.";
+      attempts--; // Don't count invalid attempts
+      attemptDiv.textContent = `Attempts: ${attempts}`;
       return;
     }
 
     if (guess === secretNumber) {
       message.textContent = `🎉 Correct! You guessed the number in ${attempts} attempts.`;
+      attemptDiv.textContent = '';
     } else if (guess < secretNumber) {
-      message.textContent = "Too low! Try again.";
+      message.textContent = "⬆️ Too low! Try again.";
+      attemptDiv.textContent = `Attempts: ${attempts}`;
     } else {
-      message.textContent = "Too high! Try again.";
+      message.textContent = "⬇️ Too high! Try again.";
+      attemptDiv.textContent = `Attempts: ${attempts}`;
     }
+  }
+
+  function restartGame() {
+    secretNumber = Math.floor(Math.random() * 100) + 1;
+    attempts = 0;
+    document.getElementById('message').textContent = "Game restarted! Make a guess.";
+    document.getElementById('attempts').textContent = '';
+    document.getElementById('guess').value = '';
   }
 </script>
 
