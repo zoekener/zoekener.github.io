@@ -1,0 +1,42 @@
+/* 1. Background color for the whole page */
+body {
+    background-color: #f0f8ff; /* light blue */
+    font-family: Arial, sans-serif; /* font family */
+    color: #333333; /* font color */
+    margin: 20px;
+}
+
+/* 2. Style for headings */
+h1, h2, h3 {
+    color: #00509e; /* dark blue */
+}
+
+/* 3. Style for navigation links */
+nav a {
+    color: #d1495b;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* 4. Div example: content blocks */
+div.content {
+    background-color: #e0f7fa;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+/* 5. Style for images */
+img {
+    border: 2px solid #00509e;
+    border-radius: 5px;
+}
+
+/* 6. Style for lists */
+ol, ul {
+    margin-left: 20px;
+}
